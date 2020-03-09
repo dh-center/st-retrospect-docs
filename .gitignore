@@ -1,0 +1,9 @@
+# Virtual environment
+.venv/
+
+# Sphinx documentation
+docs/_build/
+
+# IDE files
+.idea/
+.vscode/
