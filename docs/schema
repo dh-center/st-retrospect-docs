@@ -1,0 +1,157 @@
+enum Languages {
+  EN
+  RU
+}
+
+// Связь между инстансом локации и персоной
+// Нужна для поиска в веб-версии
+Table Relation [headercolor: #16a0f2] {
+  id int [pk]
+  RelationType int [ref: > RelationType.id]
+  // Нужно ли описание связи?
+}
+
+// Тип связи: жил, работал, был и тд..
+Table RelationType [headercolor: #00a0e0] {
+  id int [pk]
+  name string
+}
+
+// Тип локации
+Table LocationType [headercolor: #27ee60] {
+  id int [pk]
+  name string
+}
+
+// Полигон на карте. В разные периоды здесь могли находится разные здания
+Table Location  [headercolor: #27ae60] {
+  id int [pk]
+
+  // Координаты
+  lat float
+  lon float
+  // Полигон здания
+  polygon Polygon
+
+  wikiUrl string
+  address string
+  // Ценность локации. Меняется от оценок пользователей
+  value float
+
+  // Возможные представления локации.
+  // Самый первый инстанс - локация
+  // в настоящее время
+  instances int [ref: < LocationInstance.id]
+}
+
+// Локация в контексте. Это может быть временной
+// промежуток, специальное описание для конкретного
+// маршрута и тд.
+Table LocationInstance  [headercolor: #16a085] {
+  id int [pk]
+  name string
+  description string
+  imageUrl string
+
+  startDate datetime
+  endDate datetime
+
+  locationType [id] [ref: > LocationType.id]
+
+  // Указываем, было ли построено/снесено здание в данном инстансе
+  wasBuilt boolean
+  wasDemolished boolean
+
+  // Добавляем сюда другие необходимые поля и флаги
+  // ...
+
+  // Тэги
+  tags [str] [ref: < Tag.id]
+  actionTags [int] [ref: < ActionTag.id]
+
+  // Связи с локациями
+  relations [int] [ref: > Relation.id]
+}
+
+Table Person  [headercolor: #8e44ad] {
+  id int [pk]
+
+  // Базовая информация о персоне
+  firstName string
+  lastName string
+  patronymic string
+  pseudonym string
+  description string
+  birthDate datetime
+  deathDate datetime
+  imageUrl string
+
+  // Связи
+  relations [int] [ref: > Relation.id]
+
+  // Тэги
+  tags [str] [ref: < Tag.id]
+}
+
+// Маршрут - последовательный набор
+// инстансов локаций.
+Table Route [headercolor: #f39c12] {
+  id int [pk]
+  name string
+  routeType int [ref: > RouteType.id]
+  description string
+  imageUrl string
+  audioUrl string
+
+  // Имя создателя авторского маршрута
+  author string
+  // Последовательность инстансов локаций
+  locationInstances [int] [ref: < LocationInstance.id]
+}
+
+// Тип маршрута (квест/обычный/история)
+Table RouteType  [headercolor: #2c3e50] {
+  id int [pk]
+  name string
+  // Начинаем ли маршрут с самого начала
+  isStrict boolean
+  // Храним логику специфики типа маршрута(флаги)
+  // ...
+}
+
+
+Table User [headercolor: #000000]{
+  id int [pk]
+  username string
+  // Список сохранённых маршрутов
+  savedRoutes [int] [ref: < Route.id]
+
+  // Данные, собираемые при регистрации через соц сети
+  firstName string
+  lastName string
+  birthDate datetime
+  sex string
+  country string
+  city string
+  // TODO: История поиска
+  // Что именно храним?
+  searchHistory toBeDone
+  // Профиль интересов
+  interestTags [int] [ref: > Tag.id]
+}
+
+// Тэг, описывающий суть персоны/локации
+Table Tag  [headercolor: #c0392b] {
+  id str [pk]
+  name string
+}
+
+// Что можно сделать в локации.
+// Кушаем/фоткаемся/гуляем и тд
+Table ActionTag {
+  id int [pk]
+  name string
+  // Потенциально добавляем описание
+  // самих действий
+  // ...
+}
