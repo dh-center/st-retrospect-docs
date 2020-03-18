@@ -12,3 +12,4 @@
 
    pages/glossary
    pages/schema
+   pages/api-spec
