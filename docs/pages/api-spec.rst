@@ -236,6 +236,7 @@ Status: 200 OK
 .. code-block:: json
 
     {
+      "data": {
         "tags": [
           {
             "id": "5db32b6977c44a187bef2c8f",
@@ -243,6 +244,7 @@ Status: 200 OK
             "icon": "icon_url"
           }
         ]
+      }
     }
 
 Запрос ближайших партнерских локаций
@@ -273,6 +275,7 @@ Status: 200 OK
 .. code-block:: json
 
     {
+      "data": {
         "locations": [
           {
             "id": "5db32b6977c44a187bef2c8f",
@@ -282,4 +285,5 @@ Status: 200 OK
             "longitude": 30.123456
           }
         ]
+      }
     }
