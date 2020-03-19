@@ -1,15 +1,12 @@
-enum Languages {
-  EN
-  RU
-}
-
 // Связь между инстансом локации и персоной
 // Нужна для поиска в веб-версии
 Table Relation [headercolor: #16a0f2] {
   id int [pk]
-  RelationType int [ref: > RelationType.id]
-  // Нужно ли описание связи?
+  relationType int [ref: > RelationType.id]
+  person int [ref: < Person.id]
+  locationInstance int [ref: < LocationInstance.id]
 }
+
 
 // Тип связи: жил, работал, был и тд..
 Table RelationType [headercolor: #00a0e0] {
@@ -17,16 +14,17 @@ Table RelationType [headercolor: #00a0e0] {
   name string
 }
 
+
 // Тип локации
 Table LocationType [headercolor: #27ee60] {
   id int [pk]
   name string
 }
 
-// Полигон на карте. В разные периоды здесь могли находится разные здания
+
+// Точка на карте. В разные периоды здесь могли находится разные здания
 Table Location  [headercolor: #27ae60] {
   id int [pk]
-
   // Координаты
   lat float
   lon float
@@ -34,6 +32,7 @@ Table Location  [headercolor: #27ae60] {
   polygon Polygon
 
   wikiUrl string
+  iconUrl string
   address string
   // Ценность локации. Меняется от оценок пользователей
   value float
@@ -43,6 +42,7 @@ Table Location  [headercolor: #27ae60] {
   // в настоящее время
   instances int [ref: < LocationInstance.id]
 }
+
 
 // Локация в контексте. Это может быть временной
 // промежуток, специальное описание для конкретного
@@ -56,22 +56,68 @@ Table LocationInstance  [headercolor: #16a085] {
   startDate datetime
   endDate datetime
 
-  locationType [id] [ref: > LocationType.id]
-
   // Указываем, было ли построено/снесено здание в данном инстансе
   wasBuilt boolean
   wasDemolished boolean
 
   // Добавляем сюда другие необходимые поля и флаги
   // ...
-
-  // Тэги
-  tags [str] [ref: < Tag.id]
-  actionTags [int] [ref: < ActionTag.id]
-
-  // Связи с локациями
-  relations [int] [ref: > Relation.id]
 }
+
+
+// ассоциативная сущность
+// Набор тэгов для Персоны
+Table PersonTags  [headercolor: #706A61] {
+  id int [pk]
+  tag int [ref: > Tag.id]
+  person int [ref: > Person.id]
+} 
+
+
+// ассоциативная сущность
+// Набор тэгов для инстанса локации
+Table LocationInstanceTags  [headercolor: #706A61] {
+  id int [pk]
+  tag int [ref: > Tag.id]
+  locationInstance int [ref: > LocationInstance.id]
+}
+
+
+// ассоциативная сущность
+// Набор типов инстанса локации
+Table LocationInstanceTypes  [headercolor: #706A61] {
+  id int [pk]
+  type int [ref: > LocationType.id]
+  locationInstance int [ref: > LocationInstance.id]
+}
+
+
+// ассоциативная сущность
+// Набор тэгов для инстанса локации
+Table LocationInstanceActionTags  [headercolor: #706A61] {
+  id int [pk]
+  tag int [ref: > ActionTag.id]
+  locationInstance int [ref: > LocationInstance.id]
+}
+
+
+// ассоциативная сущность
+// Профиль интересов
+Table UserTags  [headercolor: #706A61] {
+  id int [pk]
+  tag int [ref: > Tag.id]
+  user int [ref: > User.id]
+}
+
+
+// ассоциативная сущность
+// Набор тэгов события
+Table EventTags  [headercolor: #706A61] {
+  id int [pk]
+  actionTag int [ref: > Tag.id]
+  event int [ref: > Event.id]
+}
+
 
 Table Person  [headercolor: #8e44ad] {
   id int [pk]
@@ -82,20 +128,15 @@ Table Person  [headercolor: #8e44ad] {
   patronymic string
   pseudonym string
   description string
-  birthDate datetime
-  deathDate datetime
+  birthDate date
+  deathDate date
   imageUrl string
-
-  // Связи
-  relations [int] [ref: > Relation.id]
-
-  // Тэги
-  tags [str] [ref: < Tag.id]
 }
+
 
 // Маршрут - последовательный набор
 // инстансов локаций.
-Table Route [headercolor: #f39c12] {
+Table Route [headercolor: #F89713] {
   id int [pk]
   name string
   routeType int [ref: > RouteType.id]
@@ -105,9 +146,18 @@ Table Route [headercolor: #f39c12] {
 
   // Имя создателя авторского маршрута
   author string
-  // Последовательность инстансов локаций
-  locationInstances [int] [ref: < LocationInstance.id]
 }
+
+
+// Указывает порядковый номер locationInstance
+// в маршруте
+Table InstanceRoutePosition [headercolor: #F89713] {
+  id int [pk]
+  route int [ref: > Route.id]
+  locationInstance int [ref: > LocationInstance.id]
+  position int
+}
+
 
 // Тип маршрута (квест/обычный/история)
 Table RouteType  [headercolor: #2c3e50] {
@@ -123,8 +173,6 @@ Table RouteType  [headercolor: #2c3e50] {
 Table User [headercolor: #000000]{
   id int [pk]
   username string
-  // Список сохранённых маршрутов
-  savedRoutes [int] [ref: < Route.id]
 
   // Данные, собираемые при регистрации через соц сети
   firstName string
@@ -136,11 +184,22 @@ Table User [headercolor: #000000]{
   // TODO: История поиска
   // Что именно храним?
   searchHistory toBeDone
-  // Профиль интересов
-  interestTags [int] [ref: > Tag.id]
 }
 
+
+// ассоциативная сущность
+// Список сохранённых маршрутов
+Table UserRoutes [headercolor: #706A61]{
+  id int [pk]
+  route int [ref: > Route.id]
+  user int [ref: > User.id]
+  //статус - на данный момент пройден/не пройден
+  status int
+}
+
+
 // Тэг, описывающий суть персоны/локации
+// Many-to-many ко всем остальным сущностям
 Table Tag  [headercolor: #c0392b] {
   id str [pk]
   name string
@@ -153,5 +212,40 @@ Table ActionTag {
   name string
   // Потенциально добавляем описание
   // самих действий
-  // ...
+  // ... 
+}
+
+// Партнёры
+Table Partner [headercolor: #F5D41F] {
+  id int
+  title string
+  description string
+}
+
+// ассоциативная сущность
+// Маршруты партнера
+Table PatnerRoutes [headercolor: #706A61] {
+  id int
+  partner int [ref: > Partner.id]
+  location int [ref: > Route.id]
+}
+
+
+// ассоциативная сущность
+// Локации партнера
+Table PatnerLocations [headercolor: #706A61] {
+  id int
+  partner int [ref: > Partner.id]
+  location int [ref: > Location.id]
+  description string
+}
+
+
+// Событие
+Table Event [headercolor: #FF5733 ]{
+  id int [pk]
+  name string
+  description string
+  locations [int] [ref: < LocationInstance.id]
+  persons [int] [ref: < Person.id]
 }
