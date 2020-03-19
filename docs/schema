@@ -139,13 +139,13 @@ Table Person  [headercolor: #8e44ad] {
 Table Route [headercolor: #F89713] {
   id int [pk]
   name string
-  routeType int [ref: > RouteType.id]
   description string
   imageUrl string
   audioUrl string
-
-  // Имя создателя авторского маршрута
+    // Имя создателя авторского маршрута
   author string
+
+  routeType int [ref: > RouteType.id]
 }
 
 
@@ -178,7 +178,7 @@ Table User [headercolor: #000000]{
   firstName string
   lastName string
   birthDate datetime
-  sex string
+  gender string
   country string
   city string
   // TODO: История поиска
@@ -194,7 +194,7 @@ Table UserRoutes [headercolor: #706A61]{
   route int [ref: > Route.id]
   user int [ref: > User.id]
   //статус - на данный момент пройден/не пройден
-  status int
+  status boolean
 }
 
 
@@ -212,13 +212,13 @@ Table ActionTag {
   name string
   // Потенциально добавляем описание
   // самих действий
-  // ... 
+  // ...
 }
 
 // Партнёры
 Table Partner [headercolor: #F5D41F] {
   id int
-  title string
+  name string
   description string
 }
 
@@ -246,6 +246,22 @@ Table Event [headercolor: #FF5733 ]{
   id int [pk]
   name string
   description string
-  locations [int] [ref: < LocationInstance.id]
-  persons [int] [ref: < Person.id]
+}
+
+
+// ассоциативная сущность
+// Локации события
+Table EventLocations [headercolor: #706A61] {
+  id int
+  event int [ref: > Event.id]
+  location int [ref: > LocationInstance.id]
+}
+
+
+// ассоциативная сущность
+// Персоны события
+Table EventPersons [headercolor: #706A61] {
+  id int
+  event int [ref: > Event.id]
+  person int [ref: > Person.id]
 }
