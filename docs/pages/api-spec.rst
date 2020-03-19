@@ -106,6 +106,57 @@ Status: 200 OK
       }
     }
 
+Запрос списка сохраненных маршрутов для пользователя
+==================================================================
+
+**Метод**:
+
+GET
+
+**URL**
+
+<TBD>
+
+**Заголовки**
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+
+accept-language: ru
+
+**Ответ**
+
+Status: 200 OK
+
+.. code-block:: json
+
+    {
+      "data": {
+        "savedRoutes": [
+          {
+            "id": "5db32b6977c44a187bef2c8f",
+            "name": "Маршрут для отчета",
+            "description": "Этот маршрут...",
+            "duration": "hh:mm",
+            "photoLink": "link",
+            "tags": [
+              "tag1",
+              "tag2",
+            ],
+            "locationsInstance": [
+              {
+                "id": "5e6410a6acb47b0039f197a9",
+                "name": "ИТМО ",
+                "description": "ИТМО ",
+                "photoLinks": [
+                  "link"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+
 Запрос маршрутов по ключевому слову и времени
 ==================================================================
 
@@ -159,4 +210,76 @@ Status: 200 OK
           }
         ]
       }
+    }
+
+Запрос популярных тегов
+==================================================================
+
+**Метод**:
+
+GET
+
+**URL**
+
+<TBD>
+
+**Заголовки**
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+
+accept-language: ru
+
+**Ответ**
+
+Status: 200 OK
+
+.. code-block:: json
+
+    {
+        "tags": [
+          {
+            "id": "5db32b6977c44a187bef2c8f",
+            "name": "Tag1",
+            "icon": "icon_url"
+          }
+        ]
+    }
+
+Запрос ближайших партнерских локаций
+==================================================================
+
+**Метод**:
+
+GET
+
+**URL**
+
+<TBD>
+
+**Заголовки**
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+
+accept-language: ru
+
+**Параметры запроса**
+
+?latitude=59.03456&longitude=30.123456
+
+**Ответ**
+
+Status: 200 OK
+
+.. code-block:: json
+
+    {
+        "locations": [
+          {
+            "id": "5db32b6977c44a187bef2c8f",
+            "name": "Библиотека Пушкина",
+            "description": "Эта локация очень хороша",
+            "latitude": 59.03456,
+            "longitude": 30.123456
+          }
+        ]
     }
