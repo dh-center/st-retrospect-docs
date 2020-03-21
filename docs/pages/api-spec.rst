@@ -84,22 +84,11 @@ Status: 200 OK
           {
             "id": "5db32b6977c44a187bef2c8f",
             "name": "Маршрут для отчета",
-            "description": "Этот маршрут...",
             "duration": "hh:mm",
             "photoLink": "link",
             "tags": [
               "tag1",
               "tag2",
-            ],
-            "locationsInstance": [
-              {
-                "id": "5e6410a6acb47b0039f197a9",
-                "name": "ИТМО ",
-                "description": "ИТМО ",
-                "photoLinks": [
-                  "link"
-                ]
-              }
             ]
           }
         ]
@@ -135,22 +124,11 @@ Status: 200 OK
           {
             "id": "5db32b6977c44a187bef2c8f",
             "name": "Маршрут для отчета",
-            "description": "Этот маршрут...",
             "duration": "hh:mm",
             "photoLink": "link",
             "tags": [
               "tag1",
               "tag2",
-            ],
-            "locationsInstance": [
-              {
-                "id": "5e6410a6acb47b0039f197a9",
-                "name": "ИТМО ",
-                "description": "ИТМО ",
-                "photoLinks": [
-                  "link"
-                ]
-              }
             ]
           }
         ]
@@ -190,22 +168,11 @@ Status: 200 OK
           {
             "id": "5db32b6977c44a187bef2c8f",
             "name": "Маршрут для отчета",
-            "description": "Этот маршрут...",
             "duration": "hh:mm",
             "photoLink": "link",
             "tags": [
               "tag1",
               "tag2",
-            ],
-            "locationsInstance": [
-              {
-                "id": "5e6410a6acb47b0039f197a9",
-                "name": "ИТМО ",
-                "description": "ИТМО ",
-                "photoLinks": [
-                  "link"
-                ]
-              }
             ]
           }
         ]
