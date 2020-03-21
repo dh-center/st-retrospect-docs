@@ -287,3 +287,77 @@ Status: 200 OK
         ]
       }
     }
+
+Запрос маршрута по id
+==================================================================
+
+**Метод**:
+
+GET
+
+**URL**
+
+<TBD>
+
+**Заголовки**
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+
+accept-language: ru
+
+**Ответ**
+
+Status: 200 OK
+
+.. code-block:: json
+
+    {
+      "data": {
+        "id": "5db32b6977c44a187bef2c8f",
+        "name": "Маршрут для отчета",
+        "description": "Этот маршрут...",
+        "duration": "hh:mm",
+        "photoLink": "link",
+        "tags": [
+          "tag1",
+          "tag2",
+        ],
+        "locationsInstance": [
+          {
+            "id": "5e6410a6acb47b0039f197a9",
+            "name": "ИТМО ",
+            "description": "ИТМО ",
+            "photoLinks": [
+              "link"
+            ]
+          }
+        ]
+      }
+    }
+
+Запрос на сохранение маршрута для пользователя
+==================================================================
+
+**Метод**:
+
+POST
+
+**Заголовки**
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+
+**URL**
+
+<TBD>
+
+**Тело запроса**:
+
+.. code-block:: json
+
+   {
+      "routeId": "5db32b6977c44a187bef2c8f"
+   }
+
+**Ответ**
+
+Status: 200 OK
