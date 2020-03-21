@@ -289,7 +289,7 @@ Status: 200 OK
           "tag1",
           "tag2",
         ],
-        "locationsInstance": [
+        "locationInstances": [
           {
             "id": "5e6410a6acb47b0039f197a9",
             "name": "ИТМО ",
