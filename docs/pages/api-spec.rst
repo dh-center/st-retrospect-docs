@@ -1,76 +1,135 @@
-################
 Спецификация API
-################
-
+============================================================
 Спецификация формата обмена данными между фронтендом и бэкендом.
 
-Запрос на регистрацию в приложении
-==================================================================
+Base API URL
+-------------------------------------------
 
-**Метод**:
+**dev**: <TBD>
+
+**prod**: <TBD>
+
+
+Запрос на регистрацию пользователя
+-------------------------------------------
+
+**Метод**
 
 POST
 
 **URL**
 
-<TBD>
+``BASE_URL/auth/users/``
 
-**Тело запроса**:
+**POST-параметры запроса**
 
-.. code-block:: json
++------------+------------+
+| Параметр   | Тип данных |
++============+============+
+| username   | Строка     |
++------------+------------+
+| password   | Строка     |
++------------+------------+
 
-   {
-      "username": "username",
-      "password": "password"
-   }
-
-**Ответ**
+**Ответ в случае успешной регистрации**
 
 Status: 201 Created
 
-Запрос на получение авторизационного токена для входа в приложение
-==================================================================
+.. code-block:: json
 
-**Метод**:
+    {
+        "email": "",
+        "username": "username",
+        "id": 4
+    }
 
-GET
+**Ответ в случае, если пользователь с таким username уже существует**
+
+Status: 400 Bad Request
+
+.. code-block:: json
+
+    {
+        "username": [
+            "A user with that username already exists."
+        ]
+    }
+
+**Ответ в случае отсутствия какого-либо параметра**
+
+Status: 400 Bad Request
+
+.. code-block:: json
+
+    {
+        "username": [
+            "This field is required."
+        ],
+        "password": [
+            "This field is required."
+        ]
+    }
+
+Запрос на авторизацию пользователя и получение токена
+------------------------------------------------------
+
+**Метод**
+
+POST
 
 **URL**
 
-<TBD>
+``BASE_URL/auth/token/login/``
 
-**Параметры запроса**:
+**POST-параметры запроса**
 
-?username=username&password=password
++------------+------------+
+| Параметр   | Тип данных |
++============+============+
+| username   | Строка     |
++------------+------------+
+| password   | Строка     |
++------------+------------+
 
-**Ответ**
+**Ответ при успешной авторизации**
 
 Status: 200 OK
 
 .. code-block:: json
 
-   {
-      "data": {
-         "accessToken": "eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9"
-      }
-   }
+    {
+     "auth_token": "c89061a66e1241fda2fa870d22e5ecd7ebc29dfe"
+    }
+
+**Ответ при неверном пароле/отсутствии какого-либо параметра**
+
+Status: 400 Bad Request
+
+.. code-block:: json
+
+    {
+        "non_field_errors": [
+            "Unable to log in with provided credentials."
+        ]
+    }
 
 Запрос списка рекомендуемых маршрутов для пользователя
-==================================================================
+------------------------------------------------------
 
-**Метод**:
+**Метод**
 
 GET
 
 **URL**
 
-<TBD>
+``BASE_URL/<TBD>``
 
 **Заголовки**
 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+::
 
-accept-language: ru
+  Authorization: Token c89061a66e1241fda2fa870d22e5ecd7ebc29dfe
+  accept-language: ru
 
 **Ответ**
 
@@ -96,21 +155,22 @@ Status: 200 OK
     }
 
 Запрос списка сохраненных маршрутов для пользователя
-==================================================================
+------------------------------------------------------
 
-**Метод**:
+**Метод**
 
 GET
 
 **URL**
 
-<TBD>
+``BASE_URL/<TBD>``
 
 **Заголовки**
 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+::
 
-accept-language: ru
+  Authorization: Token c89061a66e1241fda2fa870d22e5ecd7ebc29dfe
+  accept-language: ru
 
 **Ответ**
 
@@ -136,21 +196,22 @@ Status: 200 OK
     }
 
 Запрос маршрутов по ключевому слову и времени
-==================================================================
+------------------------------------------------------
 
-**Метод**:
+**Метод**
 
 GET
 
 **URL**
 
-<TBD>
+``BASE_URL/<TBD>``
 
 **Заголовки**
 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+::
 
-accept-language: ru
+  Authorization: Token c89061a66e1241fda2fa870d22e5ecd7ebc29dfe
+  accept-language: ru
 
 **Параметры запроса**
 
@@ -180,21 +241,22 @@ Status: 200 OK
     }
 
 Запрос популярных тегов
-==================================================================
+------------------------------------------------------
 
-**Метод**:
+**Метод**
 
 GET
 
 **URL**
 
-<TBD>
+``BASE_URL/<TBD>``
 
 **Заголовки**
 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+::
 
-accept-language: ru
+  Authorization: Token c89061a66e1241fda2fa870d22e5ecd7ebc29dfe
+  accept-language: ru
 
 **Ответ**
 
@@ -215,21 +277,22 @@ Status: 200 OK
     }
 
 Запрос ближайших партнерских локаций
-==================================================================
+------------------------------------------------------
 
-**Метод**:
+**Метод**
 
 GET
 
 **URL**
 
-<TBD>
+``BASE_URL/<TBD>``
 
 **Заголовки**
 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+::
 
-accept-language: ru
+  Authorization: Token c89061a66e1241fda2fa870d22e5ecd7ebc29dfe
+  accept-language: ru
 
 **Параметры запроса**
 
@@ -256,21 +319,22 @@ Status: 200 OK
     }
 
 Запрос маршрута по id
-==================================================================
+------------------------------------------------------
 
-**Метод**:
+**Метод**
 
 GET
 
 **URL**
 
-<TBD>
+``BASE_URL/<TBD>``
 
 **Заголовки**
 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
+::
 
-accept-language: ru
+  Authorization: Token c89061a66e1241fda2fa870d22e5ecd7ebc29dfe
+  accept-language: ru
 
 **Ответ**
 
@@ -303,21 +367,23 @@ Status: 200 OK
     }
 
 Запрос на сохранение маршрута для пользователя
-==================================================================
+------------------------------------------------------
 
-**Метод**:
+**Метод**
 
 POST
 
-**Заголовки**
-
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInr6cCI6IkpXVCJ9
-
 **URL**
 
-<TBD>
+``BASE_URL/<TBD>``
 
-**Тело запроса**:
+**Заголовки**
+
+::
+
+    Authorization: Token c89061a66e1241fda2fa870d22e5ecd7ebc29dfe
+
+**Тело запроса**
 
 .. code-block:: json
 
