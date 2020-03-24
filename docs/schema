@@ -2,9 +2,9 @@
 // Нужна для поиска в веб-версии
 Table Relation [headercolor: #16a0f2] {
   id int [pk]
-  relationType int [ref: > RelationType.id]
+  relation_type int [ref: > RelationType.id]
   person int [ref: < Person.id]
-  locationInstance int [ref: < LocationInstance.id]
+  location_instance int [ref: < LocationInstance.id]
 }
 
 
@@ -31,8 +31,8 @@ Table Location  [headercolor: #27ae60] {
   // Полигон здания
   polygon Polygon
 
-  wikiUrl string
-  iconUrl string
+  wiki_url string
+  icon_url string
   address string
   // Ценность локации. Меняется от оценок пользователей
   value float
@@ -51,14 +51,14 @@ Table LocationInstance  [headercolor: #16a085] {
   id int [pk]
   name string
   description string
-  imageUrl string
+  image_url string
 
-  startDate datetime
-  endDate datetime
+  start_date datetime
+  end_date datetime
 
   // Указываем, было ли построено/снесено здание в данном инстансе
-  wasBuilt boolean
-  wasDemolished boolean
+  was_built boolean
+  was_demolished boolean
 
   // Добавляем сюда другие необходимые поля и флаги
   // ...
@@ -71,7 +71,7 @@ Table PersonTags  [headercolor: #706A61] {
   id int [pk]
   tag int [ref: > Tag.id]
   person int [ref: > Person.id]
-} 
+}
 
 
 // ассоциативная сущность
@@ -79,7 +79,7 @@ Table PersonTags  [headercolor: #706A61] {
 Table LocationInstanceTags  [headercolor: #706A61] {
   id int [pk]
   tag int [ref: > Tag.id]
-  locationInstance int [ref: > LocationInstance.id]
+  location_instance int [ref: > LocationInstance.id]
 }
 
 
@@ -88,7 +88,7 @@ Table LocationInstanceTags  [headercolor: #706A61] {
 Table LocationInstanceTypes  [headercolor: #706A61] {
   id int [pk]
   type int [ref: > LocationType.id]
-  locationInstance int [ref: > LocationInstance.id]
+  location_instance int [ref: > LocationInstance.id]
 }
 
 
@@ -97,7 +97,7 @@ Table LocationInstanceTypes  [headercolor: #706A61] {
 Table LocationInstanceActionTags  [headercolor: #706A61] {
   id int [pk]
   tag int [ref: > ActionTag.id]
-  locationInstance int [ref: > LocationInstance.id]
+  location_instance int [ref: > LocationInstance.id]
 }
 
 
@@ -114,7 +114,7 @@ Table UserTags  [headercolor: #706A61] {
 // Набор тэгов события
 Table EventTags  [headercolor: #706A61] {
   id int [pk]
-  actionTag int [ref: > Tag.id]
+  action_tag int [ref: > Tag.id]
   event int [ref: > Event.id]
 }
 
@@ -123,14 +123,16 @@ Table Person  [headercolor: #8e44ad] {
   id int [pk]
 
   // Базовая информация о персоне
-  firstName string
-  lastName string
+  first_name string
+  last_name string
   patronymic string
   pseudonym string
   description string
-  birthDate date
-  deathDate date
-  imageUrl string
+  birth_date date
+  death_date date
+  image_url string
+  // Является ли персонаж вымышленным
+  is_fictional boolean
 }
 
 
@@ -140,12 +142,12 @@ Table Route [headercolor: #F89713] {
   id int [pk]
   name string
   description string
-  imageUrl string
-  audioUrl string
+  image_url string
+  audio_url string
     // Имя создателя авторского маршрута
   author string
 
-  routeType int [ref: > RouteType.id]
+  route_type int [ref: > RouteType.id]
 }
 
 
@@ -154,7 +156,7 @@ Table Route [headercolor: #F89713] {
 Table InstanceRoutePosition [headercolor: #F89713] {
   id int [pk]
   route int [ref: > Route.id]
-  locationInstance int [ref: > LocationInstance.id]
+  location_instance int [ref: > LocationInstance.id]
   position int
 }
 
@@ -164,7 +166,7 @@ Table RouteType  [headercolor: #2c3e50] {
   id int [pk]
   name string
   // Начинаем ли маршрут с самого начала
-  isStrict boolean
+  is_strict boolean
   // Храним логику специфики типа маршрута(флаги)
   // ...
 }
@@ -175,15 +177,15 @@ Table User [headercolor: #000000]{
   username string
 
   // Данные, собираемые при регистрации через соц сети
-  firstName string
-  lastName string
-  birthDate datetime
+  first_name string
+  last_name string
+  birth_date datetime
   gender string
   country string
   city string
   // TODO: История поиска
   // Что именно храним?
-  searchHistory toBeDone
+  search_history toBeDone
 }
 
 
@@ -264,4 +266,40 @@ Table EventPersons [headercolor: #706A61] {
   id int
   event int [ref: > Event.id]
   person int [ref: > Person.id]
+}
+
+
+// Книга
+Table Book [headercolor: #6E2C00] {
+  id int
+  name string
+  description string
+
+  created_at date
+}
+
+// Авторы книги
+Table BookAuthors [headercolor: #6E2C00] {
+  id int
+  author int [ref: < Person.id]
+  book int [ref: < Book.id]
+}
+
+
+// Персонаж, связанный с книгой
+Table BookPerson [headercolor: #6E2C00] {
+  id int
+  person int [ref: < Person.id]
+  book int [ref: < Book.id]
+}
+
+
+// Связь между вымышленным персонажем и локацией
+Table BookRelation [headercolor: #6E2C00] {
+  id int
+  relation_type int [ref: > RelationType.id]
+  book_person int [ref: < BookPerson.id]
+  location_instance int [ref: < LocationInstance.id]
+
+  description string
 }
