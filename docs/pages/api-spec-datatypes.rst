@@ -23,7 +23,7 @@ Status: 200 OK
 .. code-block:: json
 
     {
-      "route_types": [
+      [
         {
             "id": 1,
             "name": "TesetRouteType",
@@ -51,7 +51,7 @@ Status: 200 OK
 .. code-block:: json
 
     {
-      "location_types": [
+      [
         {
             "id": 1,
             "name": "доходный дом"
@@ -86,7 +86,7 @@ Status: 200 OK
 .. code-block:: json
 
     {
-      "relation_types": [
+      [
         {
             "id": 1,
             "name": "бывал"
