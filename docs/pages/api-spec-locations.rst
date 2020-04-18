@@ -66,8 +66,6 @@ Status: 200 OK
                     "was_built": null,
                     "was_demolished": false,
                     "location_id": 2773,
-                    "persons": [],
-                    "tags": [],
                     "location_types": [
                         {
                             "id": 17,

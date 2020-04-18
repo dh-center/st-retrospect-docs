@@ -119,34 +119,6 @@ Status: 200 OK
                   "was_built": null,
                   "was_demolished": false,
                   "location_id": 2189,
-                  "persons": [
-                      {
-                          "id": 779,
-                          "first_name": "Андрей",
-                          "last_name": "Квасов",
-                          "patronymic": "Васильевич",
-                          "description": "Описание",
-                          "birth_date": "1720",
-                          "death_date": "1770",
-                          "image_url": "",
-                          "tags": [
-                              {
-                                  "id": 52643,
-                                  "name": "Родившиеся в 1720 году"
-                              }
-                          ],
-                          "relation": {
-                              "quote": "Описание связи",
-                              "relation_type_id": 13
-                          }
-                      }
-                  ],
-                  "tags": [
-                      {
-                          "id": 52643,
-                          "name": "Родившиеся в 1720 году"
-                      }
-                  ],
                   "location_types": [
                       {
                           "id": 9,

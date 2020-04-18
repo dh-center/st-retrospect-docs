@@ -65,34 +65,6 @@ Status: 200 OK
                           "was_built": null,
                           "was_demolished": false,
                           "location_id": 2411,
-                          "persons": [
-                              {
-                                  "id": 675,
-                                  "first_name": "Сергей",
-                                  "last_name": "Довлатов",
-                                  "patronymic": "Донатович",
-                                  "description": "Описание",
-                                  "birth_date": "03.09.1941",
-                                  "death_date": "24.08.1990",
-                                  "image_url": "https://upload.wikimedia.org/wikipedia/ru/thumb/c/c9/%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B9_%D0%94%D0%BE%D0%B2%D0%BB%D0%B0%D1%82%D0%BE%D0%B2.jpg/345px-%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B9_%D0%94%D0%BE%D0%B2%D0%BB%D0%B0%D1%82%D0%BE%D0%B2.jpg",
-                                  "tags": [
-                                      {
-                                          "id": 22506,
-                                          "name": "Название тега"
-                                      }
-                                  ],
-                                  "relation": {
-                                      "quote": "Описание связи",
-                                      "relation_type_id": 2
-                                  }
-                              }
-                          ],
-                          "tags": [
-                              {
-                                  "id": 22506,
-                                  "name": "Название тега"
-                              }
-                          ],
                           "location_types": [
                               {
                                   "id": 2,
@@ -163,34 +135,6 @@ Status: 200 OK
                       "was_built": null,
                       "was_demolished": false,
                       "location_id": 2411,
-                      "persons": [
-                          {
-                              "id": 675,
-                              "first_name": "Сергей",
-                              "last_name": "Довлатов",
-                              "patronymic": "Донатович",
-                              "description": "Описание",
-                              "birth_date": "03.09.1941",
-                              "death_date": "24.08.1990",
-                              "image_url": "https://upload.wikimedia.org/wikipedia/ru/thumb/c/c9/%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B9_%D0%94%D0%BE%D0%B2%D0%BB%D0%B0%D1%82%D0%BE%D0%B2.jpg/345px-%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B9_%D0%94%D0%BE%D0%B2%D0%BB%D0%B0%D1%82%D0%BE%D0%B2.jpg",
-                              "tags": [
-                                  {
-                                      "id": 22506,
-                                      "name": "Название тега"
-                                  }
-                              ],
-                              "relation": {
-                                  "quote": "Описание связи",
-                                  "relation_type_id": 2
-                              }
-                          }
-                      ],
-                      "tags": [
-                          {
-                              "id": 22506,
-                              "name": "Название тега"
-                          }
-                      ],
                       "location_types": [
                           {
                               "id": 2,
