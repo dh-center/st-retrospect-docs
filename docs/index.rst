@@ -14,6 +14,7 @@
    pages/schema
    pages/api-spec-auth
    pages/api-spec-routes
+   pages/api-spec-locations
    pages/api-spec-tags
    pages/api-spec-partners
    pages/api-spec-datatypes
