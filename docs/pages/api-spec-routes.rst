@@ -126,7 +126,11 @@ Status: 200 OK
                       }
                   ],
                   "action_tags": [],
-                  "position": 0
+                  "position": 0,
+                  "coordinates": {
+                    "lat": 59.9300046,
+                    "lon": 30.3153241
+                  }
               }
           ]
       }
