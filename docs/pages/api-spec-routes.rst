@@ -342,7 +342,7 @@ Status: 200 OK
             "image_url": "http://pics.livejournal.com/noir_diamant/pic/0002achx/s640x480",
             "author": null,
             "route_type_id": 1,
-            "duration": 68
+            "duration": 68,
             "views": 0
         }
       ]
